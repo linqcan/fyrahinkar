@@ -26,5 +26,6 @@ export type Project = {
   name: string;
   description: string;
   currency: Currency;
+  necessaryExpenses: number;
   buckets: Bucket[];
 };
