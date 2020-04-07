@@ -5,7 +5,9 @@ import Typography from "@material-ui/core/Typography";
 
 const AppContainer = styled.div``;
 
-const Header = styled.header``;
+const Header = styled.header`
+  margin-bottom: 16px;
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,7 +25,9 @@ function App() {
       <GlobalStyle />
       <AppContainer>
         <Header>
-          <Typography variant="h2">Fyra hinkar</Typography>
+          <Typography variant="h2">
+            <u>Fyra hinkar</u>
+          </Typography>
         </Header>
         <StartPage />
       </AppContainer>
