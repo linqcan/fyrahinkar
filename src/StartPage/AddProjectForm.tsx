@@ -1,12 +1,12 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import { Project, Currency } from "../Types";
+import { FilledTextField } from "../Components";
 
 type AddProjectFormProps = {
   onClose: () => void;
@@ -80,9 +80,5 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
     </Dialog>
   );
 };
-
-const FilledTextField = (props: any): JSX.Element => (
-  <TextField {...props} fullWidth variant="standard" />
-);
 
 export default AddProjectForm;
