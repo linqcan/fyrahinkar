@@ -13,7 +13,7 @@ const getProject = (): Project | undefined => {
 
 export const useProject = (): [
   Project | undefined,
-  (project: Project) => void
+  (project: Project) => boolean
 ] => {
   const [project, setProject] = React.useState<Project>();
   const savedProject = getProject();
