@@ -54,11 +54,13 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
           />
           <FilledTextField
             id="project-description"
+            inputRef={descField}
             label="Beskrivning"
             multiline
           />
           <FilledTextField
             id="project-necessaryexpenses"
+            inputRef={expensesField}
             label="Nödvändinga utgifter"
             helperText="För en månad"
             InputProps={{
