@@ -1,7 +1,7 @@
 import React from "react";
 import { PrimaryButton } from "../Components";
 import { Bucket } from "../Types";
-import { Typography } from "@material-ui/core";
+import BucketView from "./BucketView";
 
 type BucketListProps = {
   buckets: Bucket[];
@@ -21,9 +21,7 @@ const BucketList = ({
       ) : (
         <div>
           {buckets.map((bucket, i) => (
-            <Typography variant="h6" key={i}>
-              {bucket.name}
-            </Typography>
+            <BucketView key={i} bucket={bucket} />
           ))}
           <PrimaryButton onClick={onCreateBucketClick}>
             Lägg till en hink

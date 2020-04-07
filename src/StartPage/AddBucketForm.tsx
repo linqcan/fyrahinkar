@@ -65,6 +65,7 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
             InputProps={{
               endAdornment: <InputAdornment position="end">Kr</InputAdornment>,
             }}
+            required
           />
           <FilledTextField
             fullWidth={false}

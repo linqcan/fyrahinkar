@@ -10,6 +10,10 @@ export const SecondaryButton = (props: ButtonProps) => (
   <Button variant="contained" color="secondary" {...props} />
 );
 
+export const SecondaryTextButton = (props: ButtonProps) => (
+  <Button variant="text" color="secondary" {...props} />
+);
+
 type FilledTextFieldProps = {
   fullWidth?: boolean;
 } & TextFieldProps;
