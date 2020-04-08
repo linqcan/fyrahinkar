@@ -9,6 +9,20 @@ const Header = styled.header`
   margin-bottom: 16px;
 `;
 
+const Footer = styled.footer`
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px darkgray dotted;
+  font-size: 12px;
+  color: black;
+  a {
+    color: black;
+    &:hover {
+      color: blue;
+    }
+  }
+`;
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: lightblue;
@@ -30,6 +44,18 @@ function App() {
           </Typography>
         </Header>
         <StartPage />
+        <Footer>
+          Baserat på&nbsp;
+          <a
+            href="https://rikatillsammans.se/fyra-hinkar-strategin/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {""}
+            "Bästa sättet att strukturera sin ekonomi och sparande" av
+            RikaTillsammans
+          </a>
+        </Footer>
       </AppContainer>
     </React.Fragment>
   );
