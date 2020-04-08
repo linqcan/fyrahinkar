@@ -55,7 +55,7 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
         Storlek (mål):&nbsp;{formatter.format(bucket.wantedAmount)}
       </Typography>
       <Typography variant="body2">
-        Storlek (verklig):&nbsp;
+        Storlek (beräknad):&nbsp;
         {formatter.format(sumBucketContents(bucket.contents))}
       </Typography>
       <Table>
