@@ -11,10 +11,10 @@ import {
   FilledTextField,
   PrimaryTextButton,
 } from "../Components";
-import { Bucket } from "../Types";
+import { Bucket, BucketContent } from "../Types";
 
 const BucketCard = styled(Card)`
-  max-width: 300px;
+  max-width: 350px;
   padding: 8px;
   margin: 8px;
 `;
@@ -45,7 +45,14 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
       <Typography variant="h6">{bucket.name}</Typography>
       <Typography variant="body2">{bucket.description}</Typography>
       <Typography variant="body2">
-        {bucket.horizon.from}-{bucket.horizon.to}år
+        Sparhorisont: {bucket.horizon.from}-{bucket.horizon.to}år
+      </Typography>
+      <Typography variant="body2">
+        Storlek (mål):&nbsp;{formatter.format(bucket.wantedAmount)}
+      </Typography>
+      <Typography variant="body2">
+        Storlek (verklig):&nbsp;
+        {formatter.format(sumBucketContents(bucket.contents))}
       </Typography>
       <Table>
         <TableBody>
@@ -53,7 +60,7 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
             <TableRow key={i}>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.description}</TableCell>
-              <TableCell>{item.amount}kr</TableCell>
+              <TableCell>{formatter.format(item.amount)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -78,6 +85,14 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
     </BucketCard>
   );
 };
+
+const formatter = new Intl.NumberFormat("se-sv", {
+  style: "currency",
+  currency: "SEK",
+});
+
+const sumBucketContents = (contents: BucketContent[]): number =>
+  contents.map((c) => c.amount).reduce((sum, val) => sum + val, 0);
 
 const getInputFieldValue = (ref: React.RefObject<HTMLInputElement>): string =>
   ref.current !== null ? ref.current.value : "";
