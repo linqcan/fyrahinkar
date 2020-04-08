@@ -19,6 +19,10 @@ const BucketCard = styled(Card)`
   margin: 8px;
 `;
 
+const AddContentButtons = styled.div`
+  text-align: right;
+`;
+
 type BucketProps = {
   bucket: Bucket;
   onBucketUpdated: (bucket: Bucket) => void;
@@ -71,10 +75,12 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
           <FilledTextField label="Beskrivning" inputRef={descField} />
           &nbsp;
           <FilledTextField label="Summa" inputRef={amountField} required />{" "}
-          <PrimaryTextButton onClick={toggleAddContentField}>
-            Avbryt
-          </PrimaryTextButton>{" "}
-          <PrimaryTextButton onClick={onSaveClick}>Klar</PrimaryTextButton>{" "}
+          <AddContentButtons>
+            <PrimaryTextButton onClick={toggleAddContentField}>
+              Avbryt
+            </PrimaryTextButton>{" "}
+            <PrimaryTextButton onClick={onSaveClick}>Klar</PrimaryTextButton>{" "}
+          </AddContentButtons>
         </React.Fragment>
       ) : null}
       {showAddContentField ? null : (
