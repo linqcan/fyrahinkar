@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: lightblue;
     height: 100%;
     width: 100%;
-    padding: 8px;
+    padding: 16px;
     margin: 0px;
   }
 `;
