@@ -22,6 +22,7 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
   const horizonToField = React.useRef<HTMLInputElement>(null);
   const saveBucket = () => {
     onSave({
+      id: new Date().getTime(),
       name: nameField.current === null ? "" : nameField.current.value,
       description: descField.current === null ? "" : descField.current.value,
       wantedAmount:

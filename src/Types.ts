@@ -1,4 +1,5 @@
 export type BucketContent = {
+  id: number;
   name: string;
   description: string;
   amount: number;
@@ -10,6 +11,7 @@ export type Horizon = {
 };
 
 export type Bucket = {
+  id: number;
   name: string;
   description: string;
   wantedAmount: number;
