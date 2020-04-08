@@ -25,7 +25,12 @@ const StartPage = () => {
       }
     }
   };
-  const createBucket = () => showHideBucketForm();
+  const updateBuckets = (newBuckets: Bucket[]) => {
+    if (project) {
+      project.buckets = newBuckets;
+      saveProject(project);
+    }
+  };
   if (!project) {
     return (
       <div>
@@ -46,7 +51,8 @@ const StartPage = () => {
         <Typography variant="body1">{project.description}</Typography>
         <BucketList
           buckets={project.buckets}
-          onCreateBucketClick={createBucket}
+          onCreateBucketClick={showHideBucketForm}
+          onBucketsUpdated={updateBuckets}
         />
         <AddBucketForm
           onSave={addBucket}
