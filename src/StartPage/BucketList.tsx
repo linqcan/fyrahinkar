@@ -2,6 +2,16 @@ import React from "react";
 import { PrimaryButton } from "../Components";
 import { Bucket } from "../Types";
 import BucketView from "./BucketView";
+import styled from "styled-components";
+
+const BucketListContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+`;
 
 type BucketListProps = {
   buckets: Bucket[];
@@ -25,18 +35,20 @@ const BucketList = ({
           Skapa din första hink
         </PrimaryButton>
       ) : (
-        <div>
-          {buckets.map((bucket, i) => (
-            <BucketView
-              onBucketUpdated={onBucketUpdated}
-              key={i}
-              bucket={bucket}
-            />
-          ))}
+        <React.Fragment>
+          <BucketListContainer>
+            {buckets.map((bucket, i) => (
+              <BucketView
+                onBucketUpdated={onBucketUpdated}
+                key={i}
+                bucket={bucket}
+              />
+            ))}
+          </BucketListContainer>
           <PrimaryButton onClick={onCreateBucketClick}>
             Lägg till en hink
           </PrimaryButton>
-        </div>
+        </React.Fragment>
       )}
     </div>
   );
