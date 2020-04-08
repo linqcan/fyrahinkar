@@ -16,11 +16,13 @@ export const useProject = (): [
   (project: Project) => boolean
 ] => {
   const [project, setProject] = React.useState<Project>();
-  const savedProject = getProject();
-  if (project === undefined && savedProject !== undefined) {
-    console.log("Setting saved project", savedProject, project);
-    setProject(savedProject);
-  }
+  React.useEffect(() => {
+    const savedProject = getProject();
+    if (project === undefined && savedProject !== undefined) {
+      console.log("Setting saved project", savedProject, project);
+      setProject(savedProject);
+    }
+  }, [project]);
   const saveProject = (project: Project): boolean => {
     try {
       console.log("Saving project", project);
