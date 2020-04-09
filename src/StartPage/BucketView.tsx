@@ -16,7 +16,6 @@ import { Bucket, BucketContent } from "../Types";
 const BucketCard = styled(Card)`
   max-width: 350px;
   padding: 8px;
-  margin: 8px;
 `;
 
 const AddContentButtons = styled.div`
