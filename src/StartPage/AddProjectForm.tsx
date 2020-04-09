@@ -62,7 +62,7 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
             id="project-necessaryexpenses"
             inputRef={expensesField}
             label="Nödvändinga utgifter"
-            helperText="För en månad"
+            helperText="1års utgifter"
             InputProps={{
               endAdornment: <InputAdornment position="end">Kr</InputAdornment>,
             }}
