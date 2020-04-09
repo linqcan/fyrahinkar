@@ -43,7 +43,7 @@ export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
 };
 
 const createBucket = (name: string, description: string): Bucket => ({
-  id: new Date().getTime(),
+  id: window.crypto.getRandomValues(new Uint32Array(1))[0],
   name,
   description,
   contents: [],
