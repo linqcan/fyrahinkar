@@ -7,6 +7,9 @@ import AddProjectForm from "./AddProjectForm";
 import BucketList from "./BucketList";
 import AddBucketForm from "./AddBucketForm";
 import { createRikaTillsammansBuckets } from "./Buckets";
+import styled from "styled-components";
+
+const Container = styled.div``;
 
 const StartPage = () => {
   const [project, saveProject] = useProject();
@@ -50,7 +53,7 @@ const StartPage = () => {
     );
   } else {
     return (
-      <div>
+      <Container>
         <Typography variant="h4">{project.name}</Typography>
         <Typography variant="body1">{project.description}</Typography>
         <BucketList
@@ -63,7 +66,7 @@ const StartPage = () => {
           onClose={showHideBucketForm}
           isOpen={bucketFormOpen}
         />
-      </div>
+      </Container>
     );
   }
 };
