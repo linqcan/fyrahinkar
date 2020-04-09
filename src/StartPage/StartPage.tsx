@@ -6,6 +6,7 @@ import { Project, Bucket } from "../Types";
 import AddProjectForm from "./AddProjectForm";
 import BucketList from "./BucketList";
 import AddBucketForm from "./AddBucketForm";
+import { createRikaTillsammansBuckets } from "./Buckets";
 
 const StartPage = () => {
   const [project, saveProject] = useProject();
@@ -14,6 +15,9 @@ const StartPage = () => {
   const showHideProjectForm = () => setProjectFormOpen((state) => !state);
   const showHideBucketForm = () => setBucketFormOpen((state) => !state);
   const projectSaved = (newProject: Project) => {
+    newProject.buckets = createRikaTillsammansBuckets(
+      newProject.necessaryExpenses
+    );
     saveProject(newProject);
   };
   const addBucket = (bucket: Bucket) => {
