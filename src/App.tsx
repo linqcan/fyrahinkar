@@ -45,16 +45,18 @@ function App() {
         </Header>
         <StartPage />
         <Footer>
-          Baserat på&nbsp;
-          <a
-            href="https://rikatillsammans.se/fyra-hinkar-strategin/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {""}
-            "Bästa sättet att strukturera sin ekonomi och sparande" av
-            RikaTillsammans
-          </a>
+          <Typography variant="caption">
+            Baserat på&nbsp;
+            <a
+              href="https://rikatillsammans.se/fyra-hinkar-strategin/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {""}
+              "Bästa sättet att strukturera sin ekonomi och sparande" av
+              RikaTillsammans
+            </a>
+          </Typography>
         </Footer>
       </AppContainer>
     </React.Fragment>
