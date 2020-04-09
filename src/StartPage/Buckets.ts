@@ -1,0 +1,55 @@
+import { Bucket } from "../Types";
+
+export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
+  const buffertHinken: Bucket = createBucket(
+    "Bufferthinken",
+    "Låg risk. Rekommenderad andel bankkonto: 50-100% Rekommenderad andel aktiefonder: 0-30% Rekommenderad andel räntefonder: 70-100% Förslag på fördelning hos LYSA 20 % aktier / 80 % räntor."
+  );
+  const mellanriskHinken: Bucket = createBucket(
+    "Mellanriskhinken",
+    "Mellan risk. Rekommenderad andel bankkonto: 0% Rekommenderad andel aktiefonder: 40-70% Rekommenderad andel räntefonder: 30-60% Förslag på fördelning hos LYSA 60 % aktier / 40 % räntor."
+  );
+  const passivHinken: Bucket = createBucket(
+    "Passivhinken",
+    "Hög risk. Rekommenderad andel bankkonto: 0% Rekommenderad andel aktiefonder: 80-100% Rekommenderad andel räntefonder: 0-20% Förslag på fördelning hos LYSA 90 % aktier / 10 % räntor."
+  );
+
+  buffertHinken.horizon = { from: 0, to: 3 };
+  mellanriskHinken.horizon = { from: 4, to: 10 };
+  passivHinken.horizon = { from: 10, to: 20 };
+
+  // All quotes from https://rikatillsammans.se/fyra-hinkar-strategin/
+
+  //""
+  //Storleken på den här hinken ska vara 12 månaders utgifter minus alla garanterade inkomster under året.
+  //Bufferthinken bör innehålla alla stora utgifter de kommande 0 – 36 månaderna såsom t.ex. sparande till en kontantinsats, pengar till skatt eller liknande.
+  //""
+  buffertHinken.wantedAmount = expenses;
+
+  //""
+  //Storleksmässigt bör mellanriskhinken vara ganska stor, gärna 3 – 7 gånger bufferthinkens storlek
+  //med minst 1-2 årsutgifter i fritt kapital såsom fonder, fondrobot eller motsvarande.
+  //""
+  mellanriskHinken.wantedAmount = buffertHinken.wantedAmount * 7;
+
+  //""
+  // Över tid kommer sannolikt den passiva hinken bli den största delen i ditt sparande även om det är den minsta när du börjar.
+  //Storleksmässigt bör du sikta efter att den ska bli så stor så att den kan finansiera den livsstil som du önskar.
+  //En bra tumregel är 25 gånger dina årsutgifter.
+  //""
+  passivHinken.wantedAmount = expenses * 25;
+
+  return [buffertHinken, mellanriskHinken, passivHinken];
+};
+
+const createBucket = (name: string, description: string): Bucket => ({
+  id: new Date().getTime(),
+  name,
+  description,
+  contents: [],
+  horizon: {
+    from: 0,
+    to: 0,
+  },
+  wantedAmount: 0,
+});
