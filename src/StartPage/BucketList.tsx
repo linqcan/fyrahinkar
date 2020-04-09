@@ -11,6 +11,7 @@ const BucketListContainer = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-column-gap: 8px;
   grid-row-gap: 8px;
+  margin-bottom: 8px;
 `;
 
 type BucketListProps = {
