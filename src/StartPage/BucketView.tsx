@@ -36,7 +36,7 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
   const onSaveClick = () => {
     toggleAddContentField();
     bucket.contents.push({
-      id: new Date().getTime(),
+      id: window.crypto.getRandomValues(new Uint32Array(1))[0],
       name: getInputFieldValue(nameField),
       description: getInputFieldValue(descField),
       amount: Number(getInputFieldValue(amountField)),

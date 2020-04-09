@@ -22,7 +22,7 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
   const horizonToField = React.useRef<HTMLInputElement>(null);
   const saveBucket = () => {
     onSave({
-      id: new Date().getTime(),
+      id: window.crypto.getRandomValues(new Uint32Array(1))[0],
       name: nameField.current === null ? "" : nameField.current.value,
       description: descField.current === null ? "" : descField.current.value,
       wantedAmount:
