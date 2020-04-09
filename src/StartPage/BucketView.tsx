@@ -47,15 +47,18 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
   return (
     <BucketCard>
       <Typography variant="h6">{bucket.name}</Typography>
-      <Typography variant="body2">{bucket.description}</Typography>
-      <Typography variant="body2">
-        Sparhorisont: {bucket.horizon.from}-{bucket.horizon.to}år
+      <Typography variant="body2" color="textSecondary">
+        {bucket.description}
       </Typography>
-      <Typography variant="body2">
-        Storlek (mål):&nbsp;{formatter.format(bucket.wantedAmount)}
+      <br />
+      <Typography variant="body1">
+        <b>Sparhorisont:</b>&nbsp;{bucket.horizon.from}-{bucket.horizon.to}år
       </Typography>
-      <Typography variant="body2">
-        Storlek (beräknad):&nbsp;
+      <Typography variant="body1">
+        <b>Storlek (mål):</b>&nbsp;{formatter.format(bucket.wantedAmount)}
+      </Typography>
+      <Typography variant="body1">
+        <b>Storlek (beräknad):</b>&nbsp;
         {formatter.format(sumBucketContents(bucket.contents))}
       </Typography>
       <Table>
@@ -70,18 +73,13 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
         </TableBody>
       </Table>
       {showAddContentField ? (
-        <React.Fragment>
-          <FilledTextField label="Namn" inputRef={nameField} required />
-          <FilledTextField label="Beskrivning" inputRef={descField} />
-          &nbsp;
-          <FilledTextField label="Summa" inputRef={amountField} required />{" "}
-          <AddContentButtons>
-            <PrimaryTextButton onClick={toggleAddContentField}>
-              Avbryt
-            </PrimaryTextButton>{" "}
-            <PrimaryTextButton onClick={onSaveClick}>Klar</PrimaryTextButton>{" "}
-          </AddContentButtons>
-        </React.Fragment>
+        <AddContentForm
+          nameRef={nameField}
+          descRef={descField}
+          amountRef={amountField}
+          onCancel={toggleAddContentField}
+          onSave={onSaveClick}
+        />
       ) : null}
       {showAddContentField ? null : (
         <SecondaryTextButton onClick={toggleAddContentField}>
@@ -91,6 +89,33 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
     </BucketCard>
   );
 };
+
+type AddContentFormProps = {
+  nameRef: React.RefObject<HTMLInputElement>;
+  descRef: React.RefObject<HTMLInputElement>;
+  amountRef: React.RefObject<HTMLInputElement>;
+  onCancel: () => void;
+  onSave: () => void;
+};
+
+const AddContentForm = ({
+  nameRef,
+  descRef,
+  amountRef,
+  onCancel,
+  onSave,
+}: AddContentFormProps): JSX.Element => (
+  <form>
+    <FilledTextField label="Namn" inputRef={nameRef} required />
+    <FilledTextField label="Beskrivning" inputRef={descRef} />
+    &nbsp;
+    <FilledTextField label="Summa" inputRef={amountRef} required />{" "}
+    <AddContentButtons>
+      <PrimaryTextButton onClick={onCancel}>Avbryt</PrimaryTextButton>{" "}
+      <PrimaryTextButton onClick={onSave}>Klar</PrimaryTextButton>{" "}
+    </AddContentButtons>
+  </form>
+);
 
 const formatter = new Intl.NumberFormat("se-sv", {
   style: "currency",
