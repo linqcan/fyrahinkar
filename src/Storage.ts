@@ -19,7 +19,7 @@ export const useProject = (): [
   React.useEffect(() => {
     const savedProject = getProject();
     if (project === undefined && savedProject !== undefined) {
-      console.log("Setting saved project", savedProject, project);
+      console.log("Found saved project", savedProject);
       setProject(savedProject);
     }
   }, [project]);
