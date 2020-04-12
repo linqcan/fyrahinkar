@@ -14,6 +14,7 @@ import {
 } from "../Components";
 import { Bucket, BucketContent } from "../Types";
 import { getInputFieldValue } from "../Utils";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const BucketCard = styled(Card)`
   max-width: 350px;
@@ -122,10 +123,24 @@ const AddContentForm = ({
   onSave,
 }: AddContentFormProps): JSX.Element => (
   <form>
-    <FilledTextField label="Namn" inputRef={nameRef} required />
-    <FilledTextField label="Beskrivning" inputRef={descRef} />
+    <FilledTextField
+      id="content-name"
+      label="Namn"
+      inputRef={nameRef}
+      required
+    />
+    <FilledTextField id="content-desc" label="Beskrivning" inputRef={descRef} />
     &nbsp;
-    <FilledTextField label="Summa" inputRef={amountRef} required />{" "}
+    <FilledTextField
+      type="number"
+      id="content-amount"
+      label="Summa"
+      inputRef={amountRef}
+      InputProps={{
+        endAdornment: <InputAdornment position="end">kr</InputAdornment>,
+      }}
+      required
+    />{" "}
     <AddContentButtons>
       <PrimaryTextButton onClick={onCancel}>Avbryt</PrimaryTextButton>{" "}
       <PrimaryTextButton onClick={onSave}>Klar</PrimaryTextButton>{" "}
