@@ -6,6 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
+import DeleteIcon from "@material-ui/icons/Delete";
 import {
   SecondaryTextButton,
   FilledTextField,
@@ -22,7 +23,7 @@ const AddContentButtons = styled.div`
   text-align: right;
 `;
 
-const DescriptionDiv = styled.div`
+const DescriptionBox = styled.span`
   white-space: pre-wrap;
 `;
 
@@ -47,11 +48,15 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
     });
     onBucketUpdated(bucket);
   };
+  const onDeleteContentClick = (id: number) => () => {
+    bucket.contents = bucket.contents.filter((c) => c.id !== id);
+    onBucketUpdated(bucket);
+  };
   return (
     <BucketCard>
       <Typography variant="h6">{bucket.name}</Typography>
       <Typography variant="body2" color="textSecondary">
-        <DescriptionDiv>{bucket.description}</DescriptionDiv>
+        <DescriptionBox>{bucket.description}</DescriptionBox>
       </Typography>
       <br />
       <Typography variant="body1">
@@ -67,10 +72,17 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
       <Table>
         <TableBody>
           {bucket.contents.map((item, i) => (
-            <TableRow key={i}>
+            <TableRow key={item.id} hover>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.description}</TableCell>
               <TableCell>{formatter.format(item.amount)}</TableCell>
+              <TableCell padding="checkbox">
+                <DeleteIcon
+                  fontSize="small"
+                  color="action"
+                  onClick={onDeleteContentClick(item.id)}
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
