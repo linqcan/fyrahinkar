@@ -3,20 +3,22 @@ import { Bucket } from "../Types";
 export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
   const buffertHinken: Bucket = createBucket(
     "Bufferthinken",
-    "Låg risk. Rekommenderad andel bankkonto: 50-100% Rekommenderad andel aktiefonder: 0-30% Rekommenderad andel räntefonder: 70-100% Förslag på fördelning hos LYSA 20 % aktier / 80 % räntor."
+    "Låg risk. \nRekommenderad andel bankkonto: 50-100% \nRekommenderad andel aktiefonder: 0-30% \nRekommenderad andel räntefonder: 70-100% \nFörslag på fördelning hos LYSA 20 % aktier / 80 % räntor."
   );
   const mellanriskHinken: Bucket = createBucket(
     "Mellanriskhinken",
-    "Mellan risk. Rekommenderad andel bankkonto: 0% Rekommenderad andel aktiefonder: 40-70% Rekommenderad andel räntefonder: 30-60% Förslag på fördelning hos LYSA 60 % aktier / 40 % räntor."
+    "Mellan risk. \nRekommenderad andel bankkonto: 0% \nRekommenderad andel aktiefonder: 40-70% Rekommenderad andel räntefonder: 30-60% \nFörslag på fördelning hos LYSA 60 % aktier / 40 % räntor."
   );
   const passivHinken: Bucket = createBucket(
     "Passivhinken",
-    "Hög risk. Rekommenderad andel bankkonto: 0% Rekommenderad andel aktiefonder: 80-100% Rekommenderad andel räntefonder: 0-20% Förslag på fördelning hos LYSA 90 % aktier / 10 % räntor."
+    "Hög risk. \nRekommenderad andel bankkonto: 0% \nRekommenderad andel aktiefonder: 80-100% Rekommenderad andel räntefonder: 0-20% \nFörslag på fördelning hos LYSA 90 % aktier / 10 % räntor."
   );
+  const lekHinken = createBucket("Lekhinken", "Mycket hög risk");
 
   buffertHinken.horizon = { from: 0, to: 3 };
   mellanriskHinken.horizon = { from: 4, to: 10 };
   passivHinken.horizon = { from: 10, to: 20 };
+  lekHinken.horizon = { from: 10, to: 50 };
 
   // All quotes from https://rikatillsammans.se/fyra-hinkar-strategin/
 
@@ -39,7 +41,15 @@ export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
   //""
   passivHinken.wantedAmount = expenses * 25;
 
-  return [buffertHinken, mellanriskHinken, passivHinken];
+  //""
+  //Syftet med den här hinken är således inte primärt att tjäna pengar utan snarare att tillfredsställa de andra
+  // känslomässiga behov som kan finnas med ett sparande.
+  //Därför begränsar vi också storleken på den här hinken till
+  // att maximalt vara 10 procent av den passiva hinken.
+  //""
+  lekHinken.wantedAmount = passivHinken.wantedAmount * 0.1;
+
+  return [buffertHinken, mellanriskHinken, passivHinken, lekHinken];
 };
 
 const createBucket = (name: string, description: string): Bucket => ({
