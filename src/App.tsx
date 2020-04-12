@@ -3,7 +3,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import StartPage from "./StartPage/StartPage";
 import Typography from "@material-ui/core/Typography";
 
-const AppContainer = styled.div``;
+const AppContainer = styled.div`
+  padding: 8px;
+`;
 
 const Header = styled.header`
   margin-bottom: 16px;
@@ -28,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: lightblue;
     height: 100%;
     width: 100%;
-    padding: 16px;
+    padding: 0px;
     margin: 0px;
   }
 `;
