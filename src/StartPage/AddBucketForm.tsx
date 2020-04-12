@@ -7,6 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { FilledTextField } from "../Components";
 import { Bucket } from "../Types";
+import { getInputFieldValue } from "../Utils";
 
 type AddBucketFormProps = {
   onClose: () => void;
@@ -23,21 +24,12 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
   const saveBucket = () => {
     onSave({
       id: window.crypto.getRandomValues(new Uint32Array(1))[0],
-      name: nameField.current === null ? "" : nameField.current.value,
-      description: descField.current === null ? "" : descField.current.value,
-      wantedAmount:
-        wantedAmountField.current === null
-          ? 0
-          : Number(wantedAmountField.current.value),
+      name: getInputFieldValue(nameField),
+      description: getInputFieldValue(descField),
+      wantedAmount: Number(getInputFieldValue(wantedAmountField)),
       horizon: {
-        from:
-          horizonFromField.current === null
-            ? 0
-            : Number(horizonFromField.current.value),
-        to:
-          horizonToField.current === null
-            ? 0
-            : Number(horizonToField.current.value),
+        from: Number(getInputFieldValue(horizonFromField)),
+        to: Number(getInputFieldValue(horizonToField)),
       },
       contents: [],
     });
@@ -64,27 +56,29 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
             inputRef={wantedAmountField}
             label="Storlek på hinken"
             InputProps={{
-              endAdornment: <InputAdornment position="end">Kr</InputAdornment>,
+              endAdornment: <InputAdornment position="end">kr</InputAdornment>,
             }}
             required
           />
           <FilledTextField
-            fullWidth={false}
+            type="number"
             id="bucket-horizon-from"
             inputRef={horizonFromField}
             label="Minsta sparhorizont"
+            fullWidth={false}
             InputProps={{
-              endAdornment: <InputAdornment position="end">År</InputAdornment>,
+              endAdornment: <InputAdornment position="end">år</InputAdornment>,
             }}
           />
           &nbsp;
           <FilledTextField
-            fullWidth={false}
+            type="number"
             id="bucket-horizon-from"
             inputRef={horizonToField}
             label="Längsta sparhorizont"
+            fullWidth={false}
             InputProps={{
-              endAdornment: <InputAdornment position="end">År</InputAdornment>,
+              endAdornment: <InputAdornment position="end">år</InputAdornment>,
             }}
           />
         </form>

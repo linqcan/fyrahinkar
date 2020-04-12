@@ -13,6 +13,7 @@ import {
   PrimaryTextButton,
 } from "../Components";
 import { Bucket, BucketContent } from "../Types";
+import { getInputFieldValue } from "../Utils";
 
 const BucketCard = styled(Card)`
   max-width: 350px;
@@ -139,8 +140,5 @@ const formatter = new Intl.NumberFormat("se-sv", {
 
 const sumBucketContents = (contents: BucketContent[]): number =>
   contents.map((c) => c.amount).reduce((sum, val) => sum + val, 0);
-
-const getInputFieldValue = (ref: React.RefObject<HTMLInputElement>): string =>
-  ref.current !== null ? ref.current.value : "";
 
 export default BucketView;

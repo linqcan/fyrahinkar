@@ -7,6 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import { Project, Currency } from "../Types";
 import { FilledTextField } from "../Components";
+import { getInputFieldValue } from "../Utils";
 
 type AddProjectFormProps = {
   onClose: () => void;
@@ -20,25 +21,12 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
   const expensesField = React.useRef<HTMLInputElement>(null);
   const saveProject = () => {
     const project: Project = {
-      name: "",
-      description: "",
+      name: getInputFieldValue(nameField),
+      description: getInputFieldValue(descField),
       currency: Currency.SEK,
-      necessaryExpenses: 0,
+      necessaryExpenses: Number(getInputFieldValue(expensesField)),
       buckets: [],
     };
-    if (nameField && nameField.current !== null) {
-      project.name = nameField.current.value;
-    }
-    if (descField && descField.current !== null) {
-      project.description = descField.current.value;
-    }
-    if (expensesField && expensesField.current !== null) {
-      try {
-        project.necessaryExpenses = Number(expensesField.current.value);
-      } catch {
-        //Raise error somehow
-      }
-    }
     onSave(project);
   };
   return (
@@ -59,6 +47,7 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
             multiline
           />
           <FilledTextField
+            type="number"
             id="project-necessaryexpenses"
             inputRef={expensesField}
             label="Nödvändinga utgifter"
