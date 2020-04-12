@@ -22,6 +22,10 @@ const AddContentButtons = styled.div`
   text-align: right;
 `;
 
+const DescriptionDiv = styled.div`
+  white-space: pre-wrap;
+`;
+
 type BucketProps = {
   bucket: Bucket;
   onBucketUpdated: (bucket: Bucket) => void;
@@ -47,11 +51,11 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
     <BucketCard>
       <Typography variant="h6">{bucket.name}</Typography>
       <Typography variant="body2" color="textSecondary">
-        {bucket.description}
+        <DescriptionDiv>{bucket.description}</DescriptionDiv>
       </Typography>
       <br />
       <Typography variant="body1">
-        <b>Sparhorisont:</b>&nbsp;{bucket.horizon.from}-{bucket.horizon.to}år
+        <b>Sparhorisont:</b>&nbsp;{bucket.horizon.from}-{bucket.horizon.to} år
       </Typography>
       <Typography variant="body1">
         <b>Storlek (mål):</b>&nbsp;{formatter.format(bucket.wantedAmount)}
