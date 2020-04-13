@@ -18,15 +18,20 @@ type BucketListProps = {
   buckets: Bucket[];
   onCreateBucketClick: () => void;
   onBucketsUpdated: (buckets: Bucket[]) => void;
+  onBucketRemove: (bucketId: number) => void;
 };
 
 const BucketList = ({
   buckets,
   onCreateBucketClick,
   onBucketsUpdated,
+  onBucketRemove,
 }: BucketListProps): JSX.Element => {
   const onBucketUpdated = (bucket: Bucket) => {
     onBucketsUpdated(buckets.map((b) => (b.id === bucket.id ? bucket : b)));
+  };
+  const removeBucket = (bucketId: number) => {
+    onBucketRemove(bucketId);
   };
   return (
     <div>
@@ -42,6 +47,7 @@ const BucketList = ({
                 onBucketUpdated={onBucketUpdated}
                 key={i}
                 bucket={bucket}
+                onBucketRemove={removeBucket}
               />
             ))}
           </BucketListContainer>

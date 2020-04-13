@@ -32,9 +32,14 @@ const DescriptionBox = styled.span`
 type BucketProps = {
   bucket: Bucket;
   onBucketUpdated: (bucket: Bucket) => void;
+  onBucketRemove: (bucketId: number) => void;
 };
 
-const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
+const BucketView = ({
+  bucket,
+  onBucketUpdated,
+  onBucketRemove,
+}: BucketProps) => {
   const [showAddContentField, setShowAddContentField] = React.useState(false);
   const nameField = React.useRef<HTMLInputElement>(null);
   const descField = React.useRef<HTMLInputElement>(null);
@@ -55,6 +60,9 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
     const updatedBucket = { ...bucket };
     updatedBucket.contents = bucket.contents.filter((c) => c.id !== id);
     onBucketUpdated(updatedBucket);
+  };
+  const onDeleteBucket = () => {
+    onBucketRemove(bucket.id);
   };
   return (
     <BucketCard>
@@ -105,6 +113,9 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
           Lägg till innehåll
         </SecondaryTextButton>
       )}
+      <SecondaryTextButton onClick={onDeleteBucket}>
+        Radera hink
+      </SecondaryTextButton>
     </BucketCard>
   );
 };
