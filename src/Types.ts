@@ -31,3 +31,7 @@ export type Project = {
   necessaryExpenses: number;
   buckets: Bucket[];
 };
+
+export type Application = {
+  project?: Project;
+};
