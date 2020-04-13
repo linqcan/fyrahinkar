@@ -26,8 +26,7 @@ const BucketList = ({
   onBucketsUpdated,
 }: BucketListProps): JSX.Element => {
   const onBucketUpdated = (bucket: Bucket) => {
-    const newBuckets = buckets.map((b) => (b.id === bucket.id ? bucket : b));
-    onBucketsUpdated(newBuckets);
+    onBucketsUpdated(buckets.map((b) => (b.id === bucket.id ? bucket : b)));
   };
   return (
     <div>

@@ -42,17 +42,19 @@ const BucketView = ({ bucket, onBucketUpdated }: BucketProps) => {
   const toggleAddContentField = () => setShowAddContentField((state) => !state);
   const onSaveClick = () => {
     toggleAddContentField();
-    bucket.contents.push({
+    const updatedBucket = { ...bucket };
+    updatedBucket.contents.push({
       id: window.crypto.getRandomValues(new Uint32Array(1))[0],
       name: getInputFieldValue(nameField),
       description: getInputFieldValue(descField),
       amount: Number(getInputFieldValue(amountField)),
     });
-    onBucketUpdated(bucket);
+    onBucketUpdated(updatedBucket);
   };
   const onDeleteContentClick = (id: number) => () => {
-    bucket.contents = bucket.contents.filter((c) => c.id !== id);
-    onBucketUpdated(bucket);
+    const updatedBucket = { ...bucket };
+    updatedBucket.contents = bucket.contents.filter((c) => c.id !== id);
+    onBucketUpdated(updatedBucket);
   };
   return (
     <BucketCard>
