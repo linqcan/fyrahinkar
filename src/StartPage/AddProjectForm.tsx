@@ -1,12 +1,12 @@
-import React from "react";
 import Button from "@material-ui/core/Button";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import { Project, Currency } from "../Types";
-import { FilledTextField } from "../Components";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import React from "react";
+import { FilledTextField, PrimaryButton } from "../Components";
+import { Currency, Project } from "../Types";
 import { getInputFieldValue } from "../Utils";
 
 type AddProjectFormProps = {
@@ -63,9 +63,9 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
         <Button variant="text" onClick={onClose}>
           Avbryt
         </Button>
-        <Button variant="text" onClick={saveProject}>
+        <PrimaryButton type="submit" onClick={saveProject}>
           Skapa
-        </Button>
+        </PrimaryButton>
       </DialogActions>
     </Dialog>
   );

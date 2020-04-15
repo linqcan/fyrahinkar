@@ -5,7 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { FilledTextField } from "../Components";
+import { FilledTextField, PrimaryButton } from "../Components";
 import { Bucket } from "../Types";
 import { getInputFieldValue } from "../Utils";
 
@@ -87,9 +87,9 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
         <Button variant="text" onClick={onClose}>
           Avbryt
         </Button>
-        <Button variant="text" onClick={saveBucket}>
+        <PrimaryButton type="submit" onClick={saveBucket}>
           Skapa
-        </Button>
+        </PrimaryButton>
       </DialogActions>
     </Dialog>
   );
