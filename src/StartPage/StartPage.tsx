@@ -20,7 +20,9 @@ const StartPage = () => {
     initState
   );
   const { project } = application;
+  if (project) {
   saveProject(project);
+  }
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
   const [bucketFormOpen, setBucketFormOpen] = React.useState(false);
   const showHideProjectForm = () => setProjectFormOpen((state) => !state);
