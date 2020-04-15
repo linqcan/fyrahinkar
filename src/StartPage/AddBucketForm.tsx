@@ -88,7 +88,7 @@ const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
           Avbryt
         </Button>
         <Button variant="text" onClick={saveBucket}>
-          Spara
+          Skapa
         </Button>
       </DialogActions>
     </Dialog>

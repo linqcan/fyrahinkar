@@ -64,7 +64,7 @@ const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
           Avbryt
         </Button>
         <Button variant="text" onClick={saveProject}>
-          Spara
+          Skapa
         </Button>
       </DialogActions>
     </Dialog>
