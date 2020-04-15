@@ -1,7 +1,16 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { PrimaryButton } from "../Components";
-import { applicationReducer, getProject, saveProject } from "../Storage";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  SecondaryTextButton,
+} from "../Components";
+import {
+  applicationReducer,
+  getProject,
+  saveProject,
+  deleteProjectFromLocalStorage,
+} from "../Storage";
 import { Project, Bucket, Application } from "../Types";
 import AddProjectForm from "./AddProjectForm";
 import BucketList from "./BucketList";
@@ -23,6 +32,8 @@ const StartPage = () => {
   React.useEffect(() => {
     if (project) {
       saveProject(project);
+    } else {
+      deleteProjectFromLocalStorage();
     }
   }, [project]);
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
@@ -50,6 +61,9 @@ const StartPage = () => {
     if (project) {
       dispatch({ type: "removeBucket", bucketId });
     }
+  };
+  const deleteProject = () => {
+    dispatch({ type: "removeProject" });
   };
   if (!project) {
     return (
@@ -80,6 +94,10 @@ const StartPage = () => {
           onClose={showHideBucketForm}
           isOpen={bucketFormOpen}
         />
+        <br />
+        <SecondaryButton onClick={deleteProject}>
+          Ta bort sparprojekt
+        </SecondaryButton>
       </Container>
     );
   }

@@ -17,6 +17,9 @@ export const saveProject = (project: Project | undefined) => {
   }
 };
 
+export const deleteProjectFromLocalStorage = () =>
+  localStorage.removeItem("project");
+
 type ApplicationAction =
   | {
       type: "addProject";
