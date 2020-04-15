@@ -20,9 +20,11 @@ const StartPage = () => {
     initState
   );
   const { project } = application;
-  if (project) {
-  saveProject(project);
-  }
+  React.useEffect(() => {
+    if (project) {
+      saveProject(project);
+    }
+  }, [project]);
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
   const [bucketFormOpen, setBucketFormOpen] = React.useState(false);
   const showHideProjectForm = () => setProjectFormOpen((state) => !state);
@@ -51,7 +53,7 @@ const StartPage = () => {
   };
   if (!project) {
     return (
-      <div>
+      <Container>
         <PrimaryButton onClick={showHideProjectForm}>
           Starta ett sparprojekt
         </PrimaryButton>
@@ -60,7 +62,7 @@ const StartPage = () => {
           onClose={showHideProjectForm}
           isOpen={projectFormOpen}
         />
-      </div>
+      </Container>
     );
   } else {
     return (
