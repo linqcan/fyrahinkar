@@ -24,14 +24,14 @@ const StartPage = () => {
     applicationReducer,
     initState
   );
-  const { project } = application;
   React.useEffect(() => {
-    if (project) {
-      saveProjectToLocalStorage(project);
+    if (application.project) {
+      saveProjectToLocalStorage(application.project);
     } else {
       deleteProjectFromLocalStorage();
     }
-  }, [project]);
+  }, [application]);
+  const { project } = application;
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
   const [bucketFormOpen, setBucketFormOpen] = React.useState(false);
   const showHideProjectForm = () => setProjectFormOpen((state) => !state);
