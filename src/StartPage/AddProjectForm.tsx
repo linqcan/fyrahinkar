@@ -16,24 +16,26 @@ type AddProjectFormProps = {
 };
 
 const AddProjectForm = ({ onClose, isOpen, onSave }: AddProjectFormProps) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const nameField = React.useRef<HTMLInputElement>(null);
   const descField = React.useRef<HTMLInputElement>(null);
   const expensesField = React.useRef<HTMLInputElement>(null);
   const saveProject = () => {
-    const project: Project = {
-      name: getInputFieldValue(nameField),
-      description: getInputFieldValue(descField),
-      currency: Currency.SEK,
-      necessaryExpenses: Number(getInputFieldValue(expensesField)),
-      buckets: [],
-    };
-    onSave(project);
+    if (formRef.current?.reportValidity()) {
+      onSave({
+        name: getInputFieldValue(nameField),
+        description: getInputFieldValue(descField),
+        currency: Currency.SEK,
+        necessaryExpenses: Number(getInputFieldValue(expensesField)),
+        buckets: [],
+      });
+    }
   };
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>Skapa ett nytt sparprojekt</DialogTitle>
       <DialogContent>
-        <form>
+        <form ref={formRef}>
           <FilledTextField
             id="project-name"
             inputRef={nameField}

@@ -16,29 +16,32 @@ type AddBucketFormProps = {
 };
 
 const AddBucketForm = ({ isOpen, onClose, onSave }: AddBucketFormProps) => {
+  const formRef = React.useRef<HTMLFormElement>(null);
   const nameField = React.useRef<HTMLInputElement>(null);
   const descField = React.useRef<HTMLInputElement>(null);
   const wantedAmountField = React.useRef<HTMLInputElement>(null);
   const horizonFromField = React.useRef<HTMLInputElement>(null);
   const horizonToField = React.useRef<HTMLInputElement>(null);
   const saveBucket = () => {
-    onSave({
-      id: window.crypto.getRandomValues(new Uint32Array(1))[0],
-      name: getInputFieldValue(nameField),
-      description: getInputFieldValue(descField),
-      wantedAmount: Number(getInputFieldValue(wantedAmountField)),
-      horizon: {
-        from: Number(getInputFieldValue(horizonFromField)),
-        to: Number(getInputFieldValue(horizonToField)),
-      },
-      contents: [],
-    });
+    if (formRef.current?.reportValidity()) {
+      onSave({
+        id: window.crypto.getRandomValues(new Uint32Array(1))[0],
+        name: getInputFieldValue(nameField),
+        description: getInputFieldValue(descField),
+        wantedAmount: Number(getInputFieldValue(wantedAmountField)),
+        horizon: {
+          from: Number(getInputFieldValue(horizonFromField)),
+          to: Number(getInputFieldValue(horizonToField)),
+        },
+        contents: [],
+      });
+    }
   };
   return (
     <Dialog open={isOpen} onClose={onClose}>
       <DialogTitle>Skapa en ny hink</DialogTitle>
       <DialogContent>
-        <form>
+        <form ref={formRef}>
           <FilledTextField
             id="bucket-name"
             inputRef={nameField}
