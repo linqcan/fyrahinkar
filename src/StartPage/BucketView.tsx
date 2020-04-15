@@ -114,7 +114,7 @@ const BucketView = ({
         </SecondaryTextButton>
       )}
       <SecondaryTextButton onClick={onDeleteBucket}>
-        Radera hink
+        Ta bort hink
       </SecondaryTextButton>
     </BucketCard>
   );
