@@ -1,14 +1,10 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  SecondaryTextButton,
-} from "../Components";
+import { PrimaryButton, SecondaryButton } from "../Components";
 import {
   applicationReducer,
   getProject,
-  saveProject,
+  saveProjectToLocalStorage,
   deleteProjectFromLocalStorage,
 } from "../Storage";
 import { Project, Bucket, Application } from "../Types";
@@ -31,7 +27,7 @@ const StartPage = () => {
   const { project } = application;
   React.useEffect(() => {
     if (project) {
-      saveProject(project);
+      saveProjectToLocalStorage(project);
     } else {
       deleteProjectFromLocalStorage();
     }

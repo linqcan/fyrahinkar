@@ -10,7 +10,7 @@ export const getProject = (): Project | undefined => {
   }
 };
 
-export const saveProject = (project: Project | undefined) => {
+export const saveProjectToLocalStorage = (project: Project | undefined) => {
   if (project) {
     console.log("Saving ", project);
     localStorage.setItem("project", JSON.stringify(project));
