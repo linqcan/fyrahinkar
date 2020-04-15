@@ -60,10 +60,9 @@ export const applicationReducer = (
       if (!state.project) {
         return state;
       }
-      const newBuckets = [...state.project.buckets];
       const newState = { ...state };
       if (newState.project) {
-        newState.project.buckets = newBuckets;
+        newState.project.buckets.push(action.bucket);
       }
       return newState;
     }
