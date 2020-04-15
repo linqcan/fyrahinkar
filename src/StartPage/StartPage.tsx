@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { PrimaryButton, SecondaryButton } from "../Components";
+import { PrimaryButton, SecondaryTextButton } from "../Components";
 import {
   applicationReducer,
   getProject,
@@ -91,9 +91,9 @@ const StartPage = () => {
           isOpen={bucketFormOpen}
         />
         <br />
-        <SecondaryButton onClick={deleteProject}>
+        <SecondaryTextButton size="small" onClick={deleteProject}>
           Ta bort sparprojekt
-        </SecondaryButton>
+        </SecondaryTextButton>
       </Container>
     );
   }
