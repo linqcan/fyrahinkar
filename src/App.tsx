@@ -58,6 +58,14 @@ function App() {
               "Bästa sättet att strukturera sin ekonomi och sparande" av
               RikaTillsammans
             </a>
+            &nbsp;|&nbsp;
+            <a
+              href="https://github.com/linqcan/fyrahinkar"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Källkod
+            </a>
           </Typography>
         </Footer>
       </AppContainer>
