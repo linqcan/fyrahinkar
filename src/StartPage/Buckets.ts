@@ -1,19 +1,19 @@
 import { Bucket } from "../Types";
 
 export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
-  const buffertHinken: Bucket = createBucket(
-    "Bufferthinken",
-    "Låg risk. \nRekommenderad andel bankkonto: 50-100% \nRekommenderad andel aktiefonder: 0-30% \nRekommenderad andel räntefonder: 70-100% \nFörslag på fördelning hos LYSA 20 % aktier / 80 % räntor."
-  );
+  const buffertHinken: Bucket = createBucket("Bufferthinken", "Låg risk.");
   const mellanriskHinken: Bucket = createBucket(
     "Mellanriskhinken",
-    "Mellan risk. \nRekommenderad andel bankkonto: 0% \nRekommenderad andel aktiefonder: 40-70% Rekommenderad andel räntefonder: 30-60% \nFörslag på fördelning hos LYSA 60 % aktier / 40 % räntor."
+    "Mellan risk. \nMål motsvarar 7 gånger bufferthinken."
   );
   const passivHinken: Bucket = createBucket(
     "Passivhinken",
-    "Hög risk. \nRekommenderad andel bankkonto: 0% \nRekommenderad andel aktiefonder: 80-100% Rekommenderad andel räntefonder: 0-20% \nFörslag på fördelning hos LYSA 90 % aktier / 10 % räntor."
+    "Hög risk. \nMål motsvarar 25 gånger nödvändinga utgifter."
   );
-  const lekHinken = createBucket("Lekhinken", "Mycket hög risk");
+  const lekHinken = createBucket(
+    "Lekhinken",
+    "Mycket hög risk. \nMål motsvarar 10% av passivhinken."
+  );
 
   buffertHinken.horizon = { from: 0, to: 3 };
   mellanriskHinken.horizon = { from: 4, to: 10 };
