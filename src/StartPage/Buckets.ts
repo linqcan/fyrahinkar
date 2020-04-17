@@ -8,7 +8,7 @@ export const createRikaTillsammansBuckets = (expenses: number): Bucket[] => {
   );
   const passivHinken: Bucket = createBucket(
     "Passivhinken",
-    "Hög risk. \nMål motsvarar 25 gånger nödvändinga utgifter."
+    "Hög risk. \nMål motsvarar 25 gånger nödvändiga utgifter."
   );
   const lekHinken = createBucket(
     "Lekhinken",
