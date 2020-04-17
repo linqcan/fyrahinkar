@@ -7,6 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import {
   SecondaryTextButton,
   FilledTextField,
@@ -15,6 +16,7 @@ import {
 import { Bucket, BucketContent } from "../Types";
 import { getInputFieldValue } from "../Utils";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { IconButton } from "@material-ui/core";
 
 const BucketCard = styled(Card)`
   max-width: 350px;
@@ -29,6 +31,10 @@ const DescriptionBox = styled.span`
   white-space: pre-wrap;
 `;
 
+const EditWantedAmountContainer = styled.div`
+  text-align: right;
+`;
+
 type BucketProps = {
   bucket: Bucket;
   onBucketUpdated: (bucket: Bucket) => void;
@@ -41,10 +47,13 @@ const BucketView = ({
   onBucketRemove,
 }: BucketProps) => {
   const [showAddContentField, setShowAddContentField] = React.useState(false);
+  const [showEditWantedField, setShowEditWantedField] = React.useState(false);
   const nameField = React.useRef<HTMLInputElement>(null);
   const descField = React.useRef<HTMLInputElement>(null);
   const amountField = React.useRef<HTMLInputElement>(null);
+  const editWantedAmountField = React.useRef<HTMLInputElement>(null);
   const toggleAddContentField = () => setShowAddContentField((state) => !state);
+  const toggleEditWantedField = () => setShowEditWantedField((state) => !state);
   const onSaveClick = () => {
     toggleAddContentField();
     const updatedBucket = { ...bucket };
@@ -64,6 +73,14 @@ const BucketView = ({
   const onDeleteBucket = () => {
     onBucketRemove(bucket.id);
   };
+  const onUpdateWantedAmount = () => {
+    const updatedBucket = { ...bucket };
+    updatedBucket.wantedAmount = Number(
+      getInputFieldValue(editWantedAmountField)
+    );
+    onBucketUpdated(updatedBucket);
+    toggleEditWantedField();
+  };
   return (
     <BucketCard>
       <Typography variant="h6">{bucket.name}</Typography>
@@ -74,9 +91,36 @@ const BucketView = ({
       <Typography variant="body1">
         <b>Sparhorisont:</b>&nbsp;{bucket.horizon.from}-{bucket.horizon.to} år
       </Typography>
-      <Typography variant="body1">
-        <b>Storlek (mål):</b>&nbsp;{formatter.format(bucket.wantedAmount)}
-      </Typography>
+      {showEditWantedField ? (
+        <form>
+          <FilledTextField
+            inputRef={editWantedAmountField}
+            label="Storlek (mål)"
+            defaultValue={bucket.wantedAmount}
+            required
+          />
+          <EditWantedAmountContainer>
+            <PrimaryTextButton
+              color="default"
+              onClick={() => setShowEditWantedField((state) => !state)}
+            >
+              Avbryt
+            </PrimaryTextButton>
+            <PrimaryTextButton onClick={onUpdateWantedAmount}>
+              Spara
+            </PrimaryTextButton>
+          </EditWantedAmountContainer>
+        </form>
+      ) : (
+        <React.Fragment>
+          <Typography variant="body1" component="span">
+            <b>Storlek (mål):</b>&nbsp;{formatter.format(bucket.wantedAmount)}
+          </Typography>
+          <IconButton onClick={toggleEditWantedField}>
+            <EditIcon color="action" fontSize="small" />
+          </IconButton>{" "}
+        </React.Fragment>
+      )}
       <Typography variant="body1">
         <b>Storlek (beräknad):</b>&nbsp;
         {formatter.format(sumBucketContents(bucket.contents))}
